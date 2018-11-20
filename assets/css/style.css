@@ -1,0 +1,6 @@
+.skin-blue .sidebar-form {
+	max-width:200px;
+}
+.skin-blue .sidebar-form input[type="text"], .skin-blue .sidebar-form .btn {
+	height: 29px;
+}

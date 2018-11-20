@@ -1,0 +1,9 @@
+data/
+logs/
+tmp/
+z/
+uploads/
+vendors/
+bower_components/
+
+todos.txt

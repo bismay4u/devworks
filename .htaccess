@@ -1,0 +1,46 @@
+#
+# Apache/PHP/Logiks settings:
+#
+
+# Protect files and directories from prying eyes.
+<FilesMatch "\.(lst|lic|xml|dat|cfg|frm|rpt|json|page|dgn|engine|inc|info|install|make|module|profile|test|po|sh|.*sql|theme|tpl(\.php)?|xtmpl)$|^(\..*|Entries.*|Repository|Root|Tag|Template)$">
+  Order allow,deny
+</FilesMatch>
+
+<Files ~ "^\.(htaccess|htpasswd)$">
+	Deny from all
+</Files>
+
+# Don't show directory listings for URLs which map to a directory.
+Options -Indexes
+Order deny,allow
+
+# Set the default handler.
+DirectoryIndex index.php index.html index.htm
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	
+	RewriteBase /devworks/
+	
+	RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+	RewriteCond %{REQUEST_URI} !^/(media|misc/themes|misc/skins|api/js)/
+	
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_FILENAME} !-l
+
+	RewriteRule ^ajax/(.*) ajax.php [L]
+	RewriteRule ^ajax ajax.php [L]
+	
+	RewriteRule ^plugin/(.*) plugin.php [L]
+	#RewriteRule ^plugin plugin.php [L]
+	
+	RewriteRule ^cmds/(.*) error.php [L]
+	RewriteRule ^cmds error.php [L]
+	
+	#RewriteRule .* index.php [L]
+	
+	#RewriteRule ^([a-zA-z]+)[/]*([a-zA-z/]*).*$ index.php?site=$1&page=$2&%{QUERY_STRING}
+</IfModule>
