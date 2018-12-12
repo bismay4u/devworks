@@ -35,4 +35,8 @@ if(defined("ROOT")) {
 //       "devops-build"=>"192.168.0.197"
 		);
 }
+
+if(file_exists("config_keys.php")) {
+  include_once "config_keys.php";
+}
 ?>
