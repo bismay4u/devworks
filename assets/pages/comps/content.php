@@ -10,7 +10,11 @@
 $(function() {
   setTimeout(function() {
     $("#targetFrame").height($("#targetFrame").parent().height());
-    $("#targetFrame").attr("src","<?=getPluginLink("welcome")?>")
+    if(window.location.hash.length>1) {
+      $("#targetFrame").attr("src","<?=getPluginLink("welcome")?>".replace("welcome",window.location.hash.substr(1)))
+    } else {
+      $("#targetFrame").attr("src","<?=getPluginLink("welcome")?>")
+    }
   }, 1000);
 });
 </script>

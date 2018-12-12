@@ -9,6 +9,7 @@ if(count($_ENV['secure']['ip_plugins'])<=0) {
 asort($fs);
 $arrOut=array();
 foreach($fs as $f) {
+  if(substr($f,0,1)==".") continue;
 	if(is_dir(ROOT."plugins/{$f}/")) {
 		$title=ucwords(str_replace("_"," ",$f));
 		$category="Default";

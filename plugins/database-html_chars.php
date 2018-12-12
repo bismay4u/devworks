@@ -21,7 +21,7 @@ input[text] {
 <form name="changeform" action="">
 	<input type="text" name="txt" id="txt" value="" placeholder='URL ...' size="30">
 	<span style='float: left;padding: 5px;padding-left: 10px;padding-right: 10px;'>=</span>
-	<output id='out1'></output>
+  <input type="text" name="out1" id="out1" value="" size="30" readonly>
 	<input name="submit" type="button" value="URL Encode" onclick="urlencode()">
 </form>
 <hr/>

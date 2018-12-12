@@ -1,10 +1,15 @@
 <?php
-$menuArr = ["general"=>[]];
+$menuArr = ["tools"=>[]];
+
+if(count($_ENV['secure']['ip_plugins'])<=0) {
+	$_ENV['secure']['ip_plugins']=array();
+}
 
 $fs = scandir(ROOT."plugins/");
 foreach($fs as $f) {
-  if($f=="." || $f==".." || in_array($f,$noShowPlugins)) continue;
-  $group = "general";
+  if($f=="." || $f==".." || substr($f,0,1)=="." || substr($f,0,1)=="~" || in_array($f,$noShowPlugins)) continue;
+  
+  $group = "tools";
   $f1 = explode("-",$f);
   if(count($f1)>1) {
     $group = $f1[0];
@@ -15,6 +20,13 @@ foreach($fs as $f) {
     $t = str_replace("{$f1[0]}-","",$t);
   }
   $t = ucwords($t);
+  
+  if(array_key_exists($slug,$_ENV['secure']['ip_plugins']))  {
+    $requiredIP = $_ENV['secure']['ip_plugins'][$slug];
+    if($_SERVER['REMOTE_ADDR']!=$requiredIP) {
+      continue;
+    }
+  }
   
   $icon = "fa fa-circle-o";
   if(isset($sidebarIcons[$slug])) {
@@ -30,7 +42,7 @@ foreach($fs as $f) {
 
 $fs = scandir(ROOT."uploads/");
 foreach($fs as $f) {
-  if($f=="." || $f=="..") continue;
+  if($f=="." || $f==".." || substr($f,0,1)=="." || substr($f,0,1)=="~") continue;
   $group = "Pending Approval";
   $t = ucwords(str_replace("_"," ",str_replace(".php","",$f)));
   if(is_dir(ROOT."plugins/{$f}")) {
@@ -39,6 +51,7 @@ foreach($fs as $f) {
     $menuArr[$group][] = ["title"=>$t,"file"=>$f];
   }
 }
+ksort($menuArr);
 ?>
 <!-- Left side column. contains the logo and sidebar -->
 <aside class="main-sidebar">

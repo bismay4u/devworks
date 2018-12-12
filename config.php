@@ -30,8 +30,9 @@ if(defined("ROOT")) {
 	
 	//Security Properties
 	$_ENV['secure']['ip_plugins']=array(
-			"pshell"=>"192.168.0.100",
-			"db_diff"=>"192.168.0.100"
+			"tools-php_shell"=>"192.168.0.100",
+			"db_diff"=>"192.168.0.100",
+//       "devops-build"=>"192.168.0.197"
 		);
 }
 ?>

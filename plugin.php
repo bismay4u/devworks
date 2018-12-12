@@ -53,9 +53,9 @@ if(strlen($xxx)>0) {
 function printPluginHTML($file) {
   ?>
   <!DOCTYPE html>
-  <html>
+  <html lang="en">
   <head>
-	  <meta charset="UTF-8">
+	  <meta charset="utf-8">
 	  <title>Plugin : <?=ucwords(str_replace("_"," ",basename($file)))?></title>
     
     <meta http-equiv="cleartype" content="on" />
